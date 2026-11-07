@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Noor's Little Universe ♡</title>
+
+<style>
+
+* {
+
+    margin: 0;
+
+    padding: 0;
+
+    box-sizing: border-box;
+
+}
+
+body {
+
+    min-height: 100vh;
+
+    background: radial-gradient(circle at top, #382044, #100c20 65%, #090713);
+
+    color: white;
+
+    font-family: Georgia, serif;
+
+    overflow-x: hidden;
+
+    text-align: center;
+
+}
+
+.stars {
+
+    position: fixed;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    z-index: 0;
+
+}
+
+.star {
+
+    position: absolute;
+
+    color: #ffd9f5;
+
+    animation: twinkle 2s infinite alternate;
+
+}
+
+@keyframes twinkle {
+
+    from { opacity: .2; transform: scale(.7); }
+
+    to { opacity: 1; transform: scale(1.3); }
+
+}
+
+.container {
+
+    position: relative;
+
+    z-index: 1;
+
+    min-height: 100vh;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: center;
+
+    padding: 30px 18px;
+
+}
+
+.small-title {
+
+    color: #e9b6df;
+
+    letter-spacing: 5px;
+
+    font-size: 11px;
+
+    margin-bottom: 20px;
+
+}
+
+h1 {
+
+    font-size: clamp(35px, 8vw, 58px);
+
+    color: #ffe1f5;
+
+    text-shadow: 0 0 25px #e58bd5;
+
+    margin-bottom: 12px;
+
+}
+
+.subtitle {
+
+    color: #d6bfd9;
+
+    font-size: 15px;
+
+    margin-bottom: 35px;
+
+}
+
+.envelope {
+
+    width: 250px;
+
+    height: 160px;
+
+    position: relative;
+
+    background: #c77bb5;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    box-shadow: 0 0 35px #d96bbf66;
+
+    transition: .5s;
+
+}
+
+.envelope::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+
+    left: 0;
+
+    border-left: 125px solid transparent;
+
+    border-right: 125px solid transparent;
+
+    border-top: 95px solid #f0addd;
+
+    transform-origin: top;
+
+    transition: .6s;
+
+    z-index: 3;
+
+}
+
+.envelope.open::before {
+
+    transform: rotateX(180deg);
+
+}
+
+.envelope::after {
+
+    content: "♡";
+
+    position: absolute;
+
+    top: 65px;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    font-size: 35px;
+
+    color: white;
+
+    z-index: 4;
+
+}
+
+.open-text {
+
+    margin-top: 28px;
+
+    color: #f4c8e8;
+
+    letter-spacing: 2px;
+
+    font-size: 12px;
+
+}
+
+button {
+
+    border: 1px solid #eab4df;
+
+    background: #b95d9d;
+
+    color: white;
+
+    padding: 14px 27px;
+
+    border-radius: 30px;
+
+    cursor: pointer;
+
+    font-size: 13px;
+
+    letter-spacing: 1px;
+
+    margin-top: 25px;
+
+    transition: .3s;
+
+}
+
+button:hover {
+
+    background: #e18bc5;
+
+    transform: scale(1.05);
+
+}
+
+.message {
+
+    display: none;
+
+    max-width: 420px;
+
+    background: #ffffff0d;
+
+    border: 1px solid #e8b5df55;
+
+    border-radius: 20px;
+
+    padding: 30px 22px;
+
+    margin-top: 30px;
+
+    backdrop-filter: blur(10px);
+
+    animation: appear 1s ease;
+
+}
+
+@keyframes appear {
+
+    from { opacity: 0; transform: translateY(20px); }
+
+    to { opacity: 1; transform: translateY(0); }
+
+}
+
+.message h2 {
+
+    color: #ffd7f2;
+
+    margin-bottom: 20px;
+
+}
+
+.message p {
+
+    color: #ead8e9;
+
+    line-height: 2;
+
+    font-size: 15px;
+
+}
+
+.hidden {
+
+    display: none;
+
+}
+
+#stars-area {
+
+    margin-top: 30px;
+
+    display: none;
+
+    max-width: 400px;
+
+}
+
+#stars-area p {
+
+    color: #e8b8e0;
+
+    margin-bottom: 15px;
+
+}
+
+.star-btn {
+
+    background: transparent;
+
+    border: none;
+
+    color: #ffe0fa;
+
+    font-size: 35px;
+
+    margin: 5px;
+
+    padding: 8px;
+
+    cursor: pointer;
+
+}
+
+#compliment {
+
+    color: #ffd7f2;
+
+    min-height: 35px;
+
+    margin-top: 15px;
+
+    line-height: 1.6;
+
+}
+
+.final {
+
+    display: none;
+
+    margin-top: 35px;
+
+    font-size: 22px;
+
+    color: #ffdaef;
+
+    line-height: 1.7;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="stars" id="stars"></div>
+
+<div class="container">
+
+    <div class="small-title">A SPECIAL LITTLE SURPRISE</div>
+
+    <h1>Dear Noor ♡</h1>
+
+    <p class="subtitle">
+
+        Somewhere in this universe, there is a little gift for you.
+
+    </p>
+
+    <div class="envelope" id="envelope"></div>
+
+    <div class="open-text" id="openText">
+
+        TAP THE ENVELOPE TO OPEN
+
+    </div>
+
+    <div class="message" id="message">
+
+        <h2>For You, Noor ✨</h2>
+
+        <p>
+
+            Some people make the world a little brighter
+
+            just by being in it.<br><br>
+
+            And you, Noor, are one of those rare souls.<br><br>
+
+            I hope life gives you a million reasons to smile,
+
+            endless moments of happiness,
+
+            and beautiful memories to keep forever. ♡
+
+        </p>
+
+        <button id="discover">
+
+            Discover Your Universe ✨
+
+        </button>
+
+    </div>
+
+    <div id="stars-area">
+
+        <p>Choose a star to discover a little message ♡</p>
+
+        <button class="star-btn" data-message="You deserve all the beautiful things in life. ♡">✦</button>
+
+        <button class="star-btn" data-message="Never forget how special you are. ✨">✧</button>
+
+        <button class="star-btn" data-message="May your dreams always find their way to you. 🌙">✦</button>
+
+        <button class="star-btn" data-message="The world is brighter with you in it. ♡">✧</button>
+
+        <div id="compliment"></div>
+
+        <button id="finish">One Last Surprise ♡</button>
+
+    </div>
+
+    <div class="final" id="final">
+
+        <h2>NOOR ♡</h2>
+
+        <p>
+
+            The universe is lucky to have you.<br>
+
+            Keep shining, beautiful soul. ✨
+
+        </p>
+
+        <p style="font-size:14px;margin-top:20px;">
+
+            Made with love, just for you.
+
+        </p>
+
+    </div>
+
+</div>
+
+<script>
+
+// Create animated stars
+
+const stars = document.getElementById("stars");
+
+for (let i = 0; i < 65; i++) {
+
+    const star = document.createElement("span");
+
+    star.className = "star";
+
+    star.textContent = "✦";
+
+    star.style.left = Math.random() * 100 + "%";
+
+    star.style.top = Math.random() * 100 + "%";
+
+    star.style.fontSize = (Math.random() * 10 + 5) + "px";
+
+    star.style.animationDelay = Math.random() * 3 + "s";
+
+    stars.appendChild(star);
+
+}
+
+// Open envelope
+
+const envelope = document.getElementById("envelope");
+
+envelope.addEventListener("click", function() {
+
+    envelope.classList.add("open");
+
+    document.getElementById("openText").style.display = "none";
+
+    document.getElementById("message").style.display = "block";
+
+});
+
+// Discover universe
+
+document.getElementById("discover").addEventListener("click", function() {
+
+    document.getElementById("stars-area").style.display = "block";
+
+    this.style.display = "none";
+
+});
+
+// Interactive stars
+
+document.querySelectorAll(".star-btn").forEach(button => {
+
+    button.addEventListener("click", function() {
+
+        document.getElementById("compliment").textContent =
+
+            this.dataset.message;
+
+    });
+
+});
+
+// Final surprise
+
+document.getElementById("finish").addEventListener("click", function() {
+
+    document.getElementById("stars-area").style.display = "none";
+
+    document.getElementById("message").style.display = "none";
+
+    document.getElementById("final").style.display = "block";
+
+});
+
+</script>
+
+</body>
+
+</html>
